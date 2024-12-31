@@ -1,0 +1,1121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Employee_Management_SystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="deptId" />
+          </Key>
+          <Property Name="deptId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="deptName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="empId" />
+          </Key>
+          <Property Name="empId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="empName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="empSalary" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="deptId" Type="int" />
+          <Property Name="managerId" Type="int" />
+          <Property Name="JoiningDate" Type="datetime" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="reportId" />
+          </Key>
+          <Property Name="reportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportDate" Type="date" Nullable="false" />
+          <Property Name="ReportName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="empId" Type="int" />
+          <Property Name="taskId" Type="int" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="roleId" />
+          </Key>
+          <Property Name="roleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="roleName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="taskId" />
+          </Key>
+          <Property Name="taskId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="taskName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="100" />
+          <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="deadLine" Type="date" Nullable="false" />
+          <Property Name="empId" Type="int" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="empId" Type="int" Nullable="false" />
+          <Property Name="userName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mobile" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="100" />
+          <Property Name="password" Type="varbinary" MaxLength="500" Nullable="false" />
+          <Property Name="roleId" Type="int" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Employee_Management_System.dbo.dtlForAdmin' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="dtlForAdmin">
+          <Key>
+            <PropertyRef Name="empId" />
+            <PropertyRef Name="Role" />
+            <PropertyRef Name="EmpName" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Department" />
+            <PropertyRef Name="Contact" />
+          </Key>
+          <Property Name="empId" Type="int" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmpName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Department" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Contact" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Employee_Management_System.dbo.dtlForEmpl' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="dtlForEmpl">
+          <Key>
+            <PropertyRef Name="Employee_Name" />
+            <PropertyRef Name="Department" />
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="Employee_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Department" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Employee_Management_System.dbo.dtlForHR' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="dtlForHR">
+          <Key>
+            <PropertyRef Name="Employee_Name" />
+            <PropertyRef Name="Department" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Contact" />
+          </Key>
+          <Property Name="Employee_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Department" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Contact" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="EmpSalary" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Employee_Management_System.dbo.dtlForManager' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="dtlForManager">
+          <Key>
+            <PropertyRef Name="Employee_Name" />
+            <PropertyRef Name="Department" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Contact" />
+          </Key>
+          <Property Name="Employee_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Department" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Contact" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Employee_Management_System.dbo.employeeDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="employeeDetails">
+          <Key>
+            <PropertyRef Name="Employee_Name" />
+            <PropertyRef Name="Department_Name" />
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="Employee_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Department_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Employee__deptId__5441852A">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="deptId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="deptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Report__empId__5BE2A6F2">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="empId" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="empId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Report__taskId__5CD6CB2B">
+          <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="taskId" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="taskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Task__empId__59063A47">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="empId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="empId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserInfo__roleId__6A30C649">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="roleId" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manager_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Employee1" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="empId" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="managerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInfo_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="empId" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="empId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Pr_DepartmentHeadCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Pr_DepartmentPendingTasks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Pr_DepartmentSalaryBudget" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Pr_DepartmentSalaryDistribution" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Pr_DepartmentWiseEmployeeReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Pr_EmplDetailsDeptWise" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="deptName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Pr_EmployeeOverview" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Pr_EmployeeRoleDistribution" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Pr_GetEmployeePerformanceReportByDepartment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="deptName" Type="varchar" Mode="In" />
+          <Parameter Name="status" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Pr_GetEmployeeTaskReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="empId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Pr_GetSalaryReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Pr_Resigned" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Pr_ResignedEmployeeContribution" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="Pr_TaskCompletionStatusReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Status" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Pr_TopPerformers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="Employee_Management_SystemModelStoreContainer">
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Report" EntityType="Self.Report" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Task" EntityType="Self.Task" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="dtlForAdmin" EntityType="Self.dtlForAdmin" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [dtlForAdmin].[empId] AS [empId], 
+    [dtlForAdmin].[Role] AS [Role], 
+    [dtlForAdmin].[EmpName] AS [EmpName], 
+    [dtlForAdmin].[Email] AS [Email], 
+    [dtlForAdmin].[Department] AS [Department], 
+    [dtlForAdmin].[Contact] AS [Contact], 
+    [dtlForAdmin].[Address] AS [Address]
+    FROM [dbo].[dtlForAdmin] AS [dtlForAdmin]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="dtlForEmpl" EntityType="Self.dtlForEmpl" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [dtlForEmpl].[Employee_Name] AS [Employee_Name], 
+    [dtlForEmpl].[Department] AS [Department], 
+    [dtlForEmpl].[Email] AS [Email]
+    FROM [dbo].[dtlForEmpl] AS [dtlForEmpl]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="dtlForHR" EntityType="Self.dtlForHR" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [dtlForHR].[Employee_Name] AS [Employee_Name], 
+    [dtlForHR].[Department] AS [Department], 
+    [dtlForHR].[Email] AS [Email], 
+    [dtlForHR].[Contact] AS [Contact], 
+    [dtlForHR].[EmpSalary] AS [EmpSalary]
+    FROM [dbo].[dtlForHR] AS [dtlForHR]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="dtlForManager" EntityType="Self.dtlForManager" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [dtlForManager].[Employee_Name] AS [Employee_Name], 
+    [dtlForManager].[Department] AS [Department], 
+    [dtlForManager].[Email] AS [Email], 
+    [dtlForManager].[Contact] AS [Contact]
+    FROM [dbo].[dtlForManager] AS [dtlForManager]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="employeeDetails" EntityType="Self.employeeDetails" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [employeeDetails].[Employee_Name] AS [Employee_Name], 
+    [employeeDetails].[Department_Name] AS [Department_Name], 
+    [employeeDetails].[Email] AS [Email]
+    FROM [dbo].[employeeDetails] AS [employeeDetails]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Employee__deptId__5441852A" Association="Self.FK__Employee__deptId__5441852A">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Report__empId__5BE2A6F2" Association="Self.FK__Report__empId__5BE2A6F2">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Report" EntitySet="Report" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Report__taskId__5CD6CB2B" Association="Self.FK__Report__taskId__5CD6CB2B">
+            <End Role="Task" EntitySet="Task" />
+            <End Role="Report" EntitySet="Report" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Task__empId__59063A47" Association="Self.FK__Task__empId__59063A47">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Task" EntitySet="Task" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserInfo__roleId__6A30C649" Association="Self.FK__UserInfo__roleId__6A30C649">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manager_Employee" Association="Self.FK_Manager_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="Employee1" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInfo_Employee" Association="Self.FK_UserInfo_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Employee_Management_SystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="deptId" />
+          </Key>
+          <Property Name="deptId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="deptName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK__Employee__deptId__5441852A" FromRole="Department" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="empId" />
+          </Key>
+          <Property Name="empId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="empName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="empSalary" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="deptId" Type="Int32" />
+          <Property Name="managerId" Type="Int32" />
+          <Property Name="JoiningDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__Employee__deptId__5441852A" FromRole="Employee" ToRole="Department" />
+          <NavigationProperty Name="Reports" Relationship="Self.FK__Report__empId__5BE2A6F2" FromRole="Employee" ToRole="Report" />
+          <NavigationProperty Name="Tasks" Relationship="Self.FK__Task__empId__59063A47" FromRole="Employee" ToRole="Task" />
+          <NavigationProperty Name="Employee1" Relationship="Self.FK_Manager_Employee" FromRole="Employee" ToRole="Employee1" />
+          <NavigationProperty Name="Employee2" Relationship="Self.FK_Manager_Employee" FromRole="Employee1" ToRole="Employee" />
+          <NavigationProperty Name="UserInfoes" Relationship="Self.FK_UserInfo_Employee" FromRole="Employee" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="Report">
+          <Key>
+            <PropertyRef Name="reportId" />
+          </Key>
+          <Property Name="reportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ReportName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="empId" Type="Int32" />
+          <Property Name="taskId" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Report__empId__5BE2A6F2" FromRole="Report" ToRole="Employee" />
+          <NavigationProperty Name="Task" Relationship="Self.FK__Report__taskId__5CD6CB2B" FromRole="Report" ToRole="Task" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="roleId" />
+          </Key>
+          <Property Name="roleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="roleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="UserInfoes" Relationship="Self.FK__UserInfo__roleId__6A30C649" FromRole="Role" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="Task">
+          <Key>
+            <PropertyRef Name="taskId" />
+          </Key>
+          <Property Name="taskId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="taskName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="deadLine" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="empId" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK__Task__empId__59063A47" FromRole="Task" ToRole="Employee" />
+          <NavigationProperty Name="Reports" Relationship="Self.FK__Report__taskId__5CD6CB2B" FromRole="Task" ToRole="Report" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="userId" />
+          </Key>
+          <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="empId" Type="Int32" Nullable="false" />
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="Binary" MaxLength="500" FixedLength="false" Nullable="false" />
+          <Property Name="roleId" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_UserInfo_Employee" FromRole="UserInfo" ToRole="Employee" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__UserInfo__roleId__6A30C649" FromRole="UserInfo" ToRole="Role" />
+        </EntityType>
+        <Association Name="FK__Employee__deptId__5441852A">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="deptId" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="deptId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Report__empId__5BE2A6F2">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="empId" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="empId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Task__empId__59063A47">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Task" Type="Self.Task" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="empId" />
+            </Principal>
+            <Dependent Role="Task">
+              <PropertyRef Name="empId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Manager_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+          <End Role="Employee1" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="empId" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="managerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInfo_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="empId" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="empId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Report__taskId__5CD6CB2B">
+          <End Role="Task" Type="Self.Task" Multiplicity="0..1" />
+          <End Role="Report" Type="Self.Report" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Task">
+              <PropertyRef Name="taskId" />
+            </Principal>
+            <Dependent Role="Report">
+              <PropertyRef Name="taskId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__UserInfo__roleId__6A30C649">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="roleId" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="roleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Employee_Management_SystemEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="Reports" EntityType="Self.Report" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Tasks" EntityType="Self.Task" />
+          <EntitySet Name="UserInfoes" EntityType="Self.UserInfo" />
+          <AssociationSet Name="FK__Employee__deptId__5441852A" Association="Self.FK__Employee__deptId__5441852A">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Report__empId__5BE2A6F2" Association="Self.FK__Report__empId__5BE2A6F2">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Report" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Task__empId__59063A47" Association="Self.FK__Task__empId__59063A47">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Task" EntitySet="Tasks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Manager_Employee" Association="Self.FK_Manager_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Employee1" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInfo_Employee" Association="Self.FK_UserInfo_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Report__taskId__5CD6CB2B" Association="Self.FK__Report__taskId__5CD6CB2B">
+            <End Role="Task" EntitySet="Tasks" />
+            <End Role="Report" EntitySet="Reports" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserInfo__roleId__6A30C649" Association="Self.FK__UserInfo__roleId__6A30C649">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+          </AssociationSet>
+          <EntitySet Name="dtlForAdmins" EntityType="Employee_Management_SystemModel.dtlForAdmin" />
+          <EntitySet Name="dtlForEmpls" EntityType="Employee_Management_SystemModel.dtlForEmpl" />
+          <EntitySet Name="dtlForHRs" EntityType="Employee_Management_SystemModel.dtlForHR" />
+          <EntitySet Name="dtlForManagers" EntityType="Employee_Management_SystemModel.dtlForManager" />
+          <EntitySet Name="employeeDetails" EntityType="Employee_Management_SystemModel.employeeDetail" />
+          <FunctionImport Name="DepartmentWiseEmployeeReport" ReturnType="Collection(Employee_Management_SystemModel.DepartmentWiseEmployeeReport_Result)" />
+          <FunctionImport Name="EmployeeOverview" ReturnType="Collection(Employee_Management_SystemModel.EmployeeOverview_Result)" />
+          <FunctionImport Name="GetEmployeePerformanceReportByDepartment" ReturnType="Collection(Employee_Management_SystemModel.GetEmployeePerformanceReportByDepartment_Result)">
+            <Parameter Name="deptName" Mode="In" Type="String" />
+            <Parameter Name="status" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetEmployeeTaskReport" ReturnType="Collection(Employee_Management_SystemModel.GetEmployeeTaskReport_Result)">
+          <Parameter Name="empId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetSalaryReport" ReturnType="Collection(Employee_Management_SystemModel.GetSalaryReport_Result)" />
+          <FunctionImport Name="Pr_DepartmentHeadCount" ReturnType="Collection(Employee_Management_SystemModel.Pr_DepartmentHeadCount_Result)" />
+          <FunctionImport Name="Pr_DepartmentSalaryDistribution" ReturnType="Collection(Employee_Management_SystemModel.Pr_DepartmentSalaryDistribution_Result)" />
+          <FunctionImport Name="Pr_EmplDetailsDeptWise" ReturnType="Collection(Employee_Management_SystemModel.Pr_EmplDetailsDeptWise_Result)">
+          <Parameter Name="deptName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Pr_PayrollReport" ReturnType="Collection(Employee_Management_SystemModel.Pr_PayrollReport_Result)">
+            <Parameter Name="DepartmentId" Mode="In" Type="Int32" />
+            <Parameter Name="IncludeInactive" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Pr_PayrollReport1" ReturnType="Collection(Employee_Management_SystemModel.Pr_PayrollReport1_Result)">
+            <Parameter Name="DepartmentId" Mode="In" Type="Int32" />
+            <Parameter Name="IncludeInactive" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="Pr_SalaryReport" ReturnType="Collection(Employee_Management_SystemModel.Pr_SalaryReport_Result)">
+            <Parameter Name="MinSalary" Mode="In" Type="Decimal" />
+            <Parameter Name="MaxSalary" Mode="In" Type="Decimal" />
+            <Parameter Name="FilterType" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="TaskCompletionDetailsEmpl" ReturnType="Collection(Employee_Management_SystemModel.TaskCompletionDetailsEmpl_Result)">
+          <Parameter Name="empName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="TaskCompletionStatusReport" ReturnType="Collection(Employee_Management_SystemModel.TaskCompletionStatusReport_Result)">
+          <Parameter Name="Status" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Pr_DepartmentPendingTasks" ReturnType="Collection(Employee_Management_SystemModel.Pr_DepartmentPendingTasks_Result)" />
+          <FunctionImport Name="Pr_DepartmentSalaryBudget" ReturnType="Collection(Employee_Management_SystemModel.Pr_DepartmentSalaryBudget_Result)" />
+          <FunctionImport Name="Pr_DepartmentSalaryDistribution1" ReturnType="Collection(Employee_Management_SystemModel.Pr_DepartmentSalaryDistribution1_Result)" />
+          <FunctionImport Name="Pr_DepartmentWiseEmployeeReport" ReturnType="Collection(Employee_Management_SystemModel.Pr_DepartmentWiseEmployeeReport_Result)" />
+          <FunctionImport Name="Pr_EmplDetailsDeptWise1" ReturnType="Collection(Employee_Management_SystemModel.Pr_EmplDetailsDeptWise1_Result)">
+          <Parameter Name="deptName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Pr_EmployeeOverview" ReturnType="Collection(Employee_Management_SystemModel.Pr_EmployeeOverview_Result)" />
+          <FunctionImport Name="Pr_EmployeeRoleDistribution" ReturnType="Collection(Employee_Management_SystemModel.Pr_EmployeeRoleDistribution_Result)" />
+          <FunctionImport Name="Pr_GetEmployeePerformanceReportByDepartment" ReturnType="Collection(Employee_Management_SystemModel.Pr_GetEmployeePerformanceReportByDepartment_Result)">
+            <Parameter Name="deptName" Mode="In" Type="String" />
+            <Parameter Name="status" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Pr_GetEmployeeTaskReport" ReturnType="Collection(Employee_Management_SystemModel.Pr_GetEmployeeTaskReport_Result)">
+          <Parameter Name="empId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Pr_GetSalaryReport" ReturnType="Collection(Employee_Management_SystemModel.Pr_GetSalaryReport_Result)" />
+          <FunctionImport Name="Pr_ResignedEmployeeContribution" />
+          <FunctionImport Name="Pr_TaskCompletionStatusReport" ReturnType="Collection(Employee_Management_SystemModel.Pr_TaskCompletionStatusReport_Result)">
+          <Parameter Name="Status" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Pr_TopPerformers" ReturnType="Collection(Employee_Management_SystemModel.Pr_TopPerformers_Result)" />
+          <FunctionImport Name="Pr_DepartmentHeadCount1" ReturnType="Collection(Employee_Management_SystemModel.Pr_DepartmentHeadCount1_Result)" />
+          <FunctionImport Name="Pr_Resigned" ReturnType="Collection(Employee_Management_SystemModel.Pr_Resigned_Result)" />
+        </EntityContainer>
+        <EntityType Name="dtlForAdmin">
+          <Key>
+            <PropertyRef Name="Role" />
+            <PropertyRef Name="EmpName" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Contact" />
+            <PropertyRef Name="empId" />
+            <PropertyRef Name="Department" />
+          </Key>
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmpName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="empId" Type="Int32" Nullable="false" />
+          <Property Name="Department" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dtlForEmpl">
+          <Key>
+            <PropertyRef Name="Employee_Name" />
+            <PropertyRef Name="Department" />
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="Employee_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Department" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dtlForHR">
+          <Key>
+            <PropertyRef Name="Employee_Name" />
+            <PropertyRef Name="Department" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Contact" />
+          </Key>
+          <Property Name="Employee_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Department" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="EmpSalary" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="dtlForManager">
+          <Key>
+            <PropertyRef Name="Employee_Name" />
+            <PropertyRef Name="Department" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Contact" />
+          </Key>
+          <Property Name="Employee_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Department" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="employeeDetail">
+          <Key>
+            <PropertyRef Name="Employee_Name" />
+            <PropertyRef Name="Department_Name" />
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="Employee_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Department_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="DepartmentWiseEmployeeReport_Result">
+          <Property Type="String" Name="Department" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="empId" Nullable="false" />
+          <Property Type="String" Name="empName" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="empSalary" Nullable="true" Precision="10" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="EmployeeOverview_Result">
+          <Property Type="Int32" Name="empId" Nullable="false" />
+          <Property Type="String" Name="empName" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="empSalary" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="String" Name="Department" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Role" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetEmployeePerformanceReportByDepartment_Result">
+          <Property Type="Int32" Name="empId" Nullable="false" />
+          <Property Type="String" Name="empName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="TasksCompleted" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetEmployeeTaskReport_Result">
+          <Property Type="Int32" Name="taskId" Nullable="false" />
+          <Property Type="String" Name="taskName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="deadLine" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetSalaryReport_Result">
+          <Property Type="Int32" Name="empId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Salary" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="String" Name="Department" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Pr_DepartmentHeadCount_Result">
+          <Property Type="String" Name="Department_Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Total_Employees" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Pr_DepartmentSalaryDistribution_Result">
+          <Property Type="String" Name="Department" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Total_Employees" Nullable="true" />
+          <Property Type="Decimal" Name="Total_Salary_Distribution" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Average_Salary" Nullable="true" Precision="38" Scale="6" />
+        </ComplexType>
+        <ComplexType Name="Pr_EmplDetailsDeptWise_Result">
+          <Property Type="String" Name="Employee_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Department_Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Pr_PayrollReport_Result">
+          <Property Type="String" Name="Employee_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Department" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Gross_Salary" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="Tax_Deduction" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="Other_Deductions" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="Net_Salary" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Contact" Nullable="false" MaxLength="15" />
+          <Property Type="DateTime" Name="Joining_Date" Nullable="false" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="Pr_PayrollReport1_Result">
+          <Property Type="String" Name="Employee_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Department" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Gross_Salary" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="Tax_Deduction" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="Other_Deductions" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="Net_Salary" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Contact" Nullable="false" MaxLength="15" />
+          <Property Type="Boolean" Name="Is_Active" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Pr_SalaryReport_Result">
+          <Property Type="String" Name="Employee_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Department" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Salary" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Contact" Nullable="false" MaxLength="15" />
+        </ComplexType>
+        <ComplexType Name="TaskCompletionDetailsEmpl_Result">
+          <Property Type="String" Name="empName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="TotalAssignedTasks" Nullable="true" />
+          <Property Type="Int32" Name="CompletedTasks" Nullable="true" />
+          <Property Type="Int32" Name="PendingTasks" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="TaskCompletionStatusReport_Result">
+          <Property Type="Int32" Name="taskId" Nullable="false" />
+          <Property Type="String" Name="taskName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="AssignedTo" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="deadLine" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Pr_DepartmentPendingTasks_Result">
+          <Property Type="String" Name="Department" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Total_Pending_Tasks" Nullable="true" />
+          <Property Type="String" Name="Employee_Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Pr_DepartmentSalaryBudget_Result">
+          <Property Type="String" Name="Department" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Total_Employees" Nullable="true" />
+          <Property Type="Decimal" Name="Total_Salary" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Highest_Salary" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="Lowest_Salary" Nullable="true" Precision="10" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="Pr_DepartmentSalaryDistribution1_Result">
+          <Property Type="String" Name="Department" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Total_Employees" Nullable="true" />
+          <Property Type="Decimal" Name="Total_Salary_Distribution" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="Average_Salary" Nullable="true" Precision="38" Scale="6" />
+        </ComplexType>
+        <ComplexType Name="Pr_DepartmentWiseEmployeeReport_Result">
+          <Property Type="String" Name="Department" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="empId" Nullable="false" />
+          <Property Type="String" Name="empName" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="empSalary" Nullable="true" Precision="10" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="Pr_EmplDetailsDeptWise1_Result">
+          <Property Type="String" Name="Employee_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="30" />
+          <Property Type="String" Name="Department_Name" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Pr_EmployeeOverview_Result">
+          <Property Type="Int32" Name="empId" Nullable="false" />
+          <Property Type="String" Name="empName" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="empSalary" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="String" Name="Department" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Role" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Pr_EmployeeRoleDistribution_Result">
+          <Property Type="String" Name="Role" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Department" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Total_Employees" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Pr_GetEmployeePerformanceReportByDepartment_Result">
+          <Property Type="Int32" Name="empId" Nullable="false" />
+          <Property Type="String" Name="empName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Tasks" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Pr_GetEmployeeTaskReport_Result">
+          <Property Type="Int32" Name="taskId" Nullable="false" />
+          <Property Type="String" Name="taskName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="20" />
+          <Property Type="DateTime" Name="deadLine" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Pr_GetSalaryReport_Result">
+          <Property Type="Int32" Name="empId" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Salary" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="String" Name="Department" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="Pr_TaskCompletionStatusReport_Result">
+          <Property Type="Int32" Name="taskId" Nullable="false" />
+          <Property Type="String" Name="taskName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Status" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="AssignedTo" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="deadLine" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="Pr_TopPerformers_Result">
+          <Property Type="Int32" Name="empId" Nullable="false" />
+          <Property Type="String" Name="Employee_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Department" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Completed_Tasks" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Pr_DepartmentHeadCount1_Result">
+          <Property Type="String" Name="Department_Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Total_Employees" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="Pr_Resigned_Result">
+          <Property Type="Int32" Name="empId" Nullable="false" />
+          <Property Type="String" Name="Employee_Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Total_Tasks_Completed" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Employee_Management_SystemModelStoreContainer" CdmEntityContainer="Employee_Management_SystemEntities3">
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="Employee_Management_SystemModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="deptId" ColumnName="deptId" />
+                <ScalarProperty Name="deptName" ColumnName="deptName" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="Employee_Management_SystemModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="empId" ColumnName="empId" />
+                <ScalarProperty Name="empName" ColumnName="empName" />
+                <ScalarProperty Name="empSalary" ColumnName="empSalary" />
+                <ScalarProperty Name="deptId" ColumnName="deptId" />
+                <ScalarProperty Name="managerId" ColumnName="managerId" />
+                <ScalarProperty Name="JoiningDate" ColumnName="JoiningDate" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reports">
+            <EntityTypeMapping TypeName="Employee_Management_SystemModel.Report">
+              <MappingFragment StoreEntitySet="Report">
+                <ScalarProperty Name="reportId" ColumnName="reportId" />
+                <ScalarProperty Name="ReportDate" ColumnName="ReportDate" />
+                <ScalarProperty Name="ReportName" ColumnName="ReportName" />
+                <ScalarProperty Name="empId" ColumnName="empId" />
+                <ScalarProperty Name="taskId" ColumnName="taskId" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Employee_Management_SystemModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+                <ScalarProperty Name="roleName" ColumnName="roleName" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasks">
+            <EntityTypeMapping TypeName="Employee_Management_SystemModel.Task">
+              <MappingFragment StoreEntitySet="Task">
+                <ScalarProperty Name="taskId" ColumnName="taskId" />
+                <ScalarProperty Name="taskName" ColumnName="taskName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="deadLine" ColumnName="deadLine" />
+                <ScalarProperty Name="empId" ColumnName="empId" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfoes">
+            <EntityTypeMapping TypeName="Employee_Management_SystemModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="empId" ColumnName="empId" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="roleId" ColumnName="roleId" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dtlForAdmins">
+            <EntityTypeMapping TypeName="Employee_Management_SystemModel.dtlForAdmin">
+              <MappingFragment StoreEntitySet="dtlForAdmin">
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="empId" ColumnName="empId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dtlForEmpls">
+            <EntityTypeMapping TypeName="Employee_Management_SystemModel.dtlForEmpl">
+              <MappingFragment StoreEntitySet="dtlForEmpl">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Employee_Name" ColumnName="Employee_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dtlForHRs">
+            <EntityTypeMapping TypeName="Employee_Management_SystemModel.dtlForHR">
+              <MappingFragment StoreEntitySet="dtlForHR">
+                <ScalarProperty Name="EmpSalary" ColumnName="EmpSalary" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Employee_Name" ColumnName="Employee_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dtlForManagers">
+            <EntityTypeMapping TypeName="Employee_Management_SystemModel.dtlForManager">
+              <MappingFragment StoreEntitySet="dtlForManager">
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Employee_Name" ColumnName="Employee_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employeeDetails">
+            <EntityTypeMapping TypeName="Employee_Management_SystemModel.employeeDetail">
+              <MappingFragment StoreEntitySet="employeeDetails">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
+                <ScalarProperty Name="Employee_Name" ColumnName="Employee_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Pr_DepartmentPendingTasks" FunctionName="Employee_Management_SystemModel.Store.Pr_DepartmentPendingTasks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Employee_Management_SystemModel.Pr_DepartmentPendingTasks_Result">
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Total_Pending_Tasks" ColumnName="Total_Pending_Tasks" />
+                <ScalarProperty Name="Employee_Name" ColumnName="Employee_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Pr_DepartmentSalaryBudget" FunctionName="Employee_Management_SystemModel.Store.Pr_DepartmentSalaryBudget">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Employee_Management_SystemModel.Pr_DepartmentSalaryBudget_Result">
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Total_Employees" ColumnName="Total_Employees" />
+                <ScalarProperty Name="Total_Salary" ColumnName="Total_Salary" />
+                <ScalarProperty Name="Highest_Salary" ColumnName="Highest_Salary" />
+                <ScalarProperty Name="Lowest_Salary" ColumnName="Lowest_Salary" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Pr_DepartmentSalaryDistribution1" FunctionName="Employee_Management_SystemModel.Store.Pr_DepartmentSalaryDistribution">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Employee_Management_SystemModel.Pr_DepartmentSalaryDistribution1_Result">
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Total_Employees" ColumnName="Total_Employees" />
+                <ScalarProperty Name="Total_Salary_Distribution" ColumnName="Total_Salary_Distribution" />
+                <ScalarProperty Name="Average_Salary" ColumnName="Average_Salary" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Pr_DepartmentWiseEmployeeReport" FunctionName="Employee_Management_SystemModel.Store.Pr_DepartmentWiseEmployeeReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Employee_Management_SystemModel.Pr_DepartmentWiseEmployeeReport_Result">
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="empId" ColumnName="empId" />
+                <ScalarProperty Name="empName" ColumnName="empName" />
+                <ScalarProperty Name="empSalary" ColumnName="empSalary" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Pr_EmplDetailsDeptWise1" FunctionName="Employee_Management_SystemModel.Store.Pr_EmplDetailsDeptWise">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Employee_Management_SystemModel.Pr_EmplDetailsDeptWise1_Result">
+                <ScalarProperty Name="Employee_Name" ColumnName="Employee_Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Pr_EmployeeOverview" FunctionName="Employee_Management_SystemModel.Store.Pr_EmployeeOverview">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Employee_Management_SystemModel.Pr_EmployeeOverview_Result">
+                <ScalarProperty Name="empId" ColumnName="empId" />
+                <ScalarProperty Name="empName" ColumnName="empName" />
+                <ScalarProperty Name="empSalary" ColumnName="empSalary" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Pr_EmployeeRoleDistribution" FunctionName="Employee_Management_SystemModel.Store.Pr_EmployeeRoleDistribution">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Employee_Management_SystemModel.Pr_EmployeeRoleDistribution_Result">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Total_Employees" ColumnName="Total_Employees" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Pr_GetEmployeePerformanceReportByDepartment" FunctionName="Employee_Management_SystemModel.Store.Pr_GetEmployeePerformanceReportByDepartment">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Employee_Management_SystemModel.Pr_GetEmployeePerformanceReportByDepartment_Result">
+                <ScalarProperty Name="empId" ColumnName="empId" />
+                <ScalarProperty Name="empName" ColumnName="empName" />
+                <ScalarProperty Name="Tasks" ColumnName="Tasks" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Pr_GetEmployeeTaskReport" FunctionName="Employee_Management_SystemModel.Store.Pr_GetEmployeeTaskReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Employee_Management_SystemModel.Pr_GetEmployeeTaskReport_Result">
+                <ScalarProperty Name="taskId" ColumnName="taskId" />
+                <ScalarProperty Name="taskName" ColumnName="taskName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="deadLine" ColumnName="deadLine" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Pr_GetSalaryReport" FunctionName="Employee_Management_SystemModel.Store.Pr_GetSalaryReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Employee_Management_SystemModel.Pr_GetSalaryReport_Result">
+                <ScalarProperty Name="empId" ColumnName="empId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Pr_ResignedEmployeeContribution" FunctionName="Employee_Management_SystemModel.Store.Pr_ResignedEmployeeContribution" />
+          <FunctionImportMapping FunctionImportName="Pr_TaskCompletionStatusReport" FunctionName="Employee_Management_SystemModel.Store.Pr_TaskCompletionStatusReport">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Employee_Management_SystemModel.Pr_TaskCompletionStatusReport_Result">
+                <ScalarProperty Name="taskId" ColumnName="taskId" />
+                <ScalarProperty Name="taskName" ColumnName="taskName" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+                <ScalarProperty Name="deadLine" ColumnName="deadLine" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Pr_TopPerformers" FunctionName="Employee_Management_SystemModel.Store.Pr_TopPerformers">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Employee_Management_SystemModel.Pr_TopPerformers_Result">
+                <ScalarProperty Name="empId" ColumnName="empId" />
+                <ScalarProperty Name="Employee_Name" ColumnName="Employee_Name" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Completed_Tasks" ColumnName="Completed_Tasks" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Pr_DepartmentHeadCount1" FunctionName="Employee_Management_SystemModel.Store.Pr_DepartmentHeadCount">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Employee_Management_SystemModel.Pr_DepartmentHeadCount1_Result">
+                <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
+                <ScalarProperty Name="Total_Employees" ColumnName="Total_Employees" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Pr_Resigned" FunctionName="Employee_Management_SystemModel.Store.Pr_Resigned">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Employee_Management_SystemModel.Pr_Resigned_Result">
+                <ScalarProperty Name="empId" ColumnName="empId" />
+                <ScalarProperty Name="Employee_Name" ColumnName="Employee_Name" />
+                <ScalarProperty Name="Total_Tasks_Completed" ColumnName="Total_Tasks_Completed" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

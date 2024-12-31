@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0b0b712b0b2442baa3323ddfb947800b" Name="Diagram1" ShowGrid="true" SnapToGrid="false" ZoomLevel="103">
+        <EntityTypeShape EntityType="Employee_Management_SystemModel.Department" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Employee_Management_SystemModel.Employee" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Employee_Management_SystemModel.Report" Width="1.5" PointX="7.5" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Employee_Management_SystemModel.Role" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Employee_Management_SystemModel.Task" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Employee_Management_SystemModel.UserInfo" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="Employee_Management_SystemModel.FK__Employee__deptId__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="Employee_Management_SystemModel.FK__Report__empId__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="Employee_Management_SystemModel.FK__Task__empId__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="Employee_Management_SystemModel.FK_Manager_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="Employee_Management_SystemModel.FK_UserInfo_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="Employee_Management_SystemModel.FK__Report__taskId__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="Employee_Management_SystemModel.FK__UserInfo__roleId__6A30C649" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Employee_Management_SystemModel.dtlForAdmin" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Employee_Management_SystemModel.dtlForEmpl" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Employee_Management_SystemModel.dtlForHR" Width="1.5" PointX="7.75" PointY="3.75" />
+        <EntityTypeShape EntityType="Employee_Management_SystemModel.dtlForManager" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Employee_Management_SystemModel.employeeDetail" Width="1.5" PointX="0.75" PointY="9.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
