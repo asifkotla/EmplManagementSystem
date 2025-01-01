@@ -69,6 +69,7 @@
           <Property Name="password" Type="varbinary" MaxLength="500" Nullable="false" />
           <Property Name="roleId" Type="int" />
           <Property Name="isActive" Type="bit" Nullable="false" />
+          <Property Name="otp" Type="varchar" MaxLength="6" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Employee_Management_System.dbo.dtlForAdmin' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -410,6 +411,7 @@ warning 6002: The table/view 'Employee_Management_System.dbo.employeeDetails' do
           <Property Name="isActive" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="Self.FK_UserInfo_Employee" FromRole="UserInfo" ToRole="Employee" />
           <NavigationProperty Name="Role" Relationship="Self.FK__UserInfo__roleId__6A30C649" FromRole="UserInfo" ToRole="Role" />
+          <Property Name="otp" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__Employee__deptId__5441852A">
           <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
@@ -892,6 +894,7 @@ warning 6002: The table/view 'Employee_Management_System.dbo.employeeDetails' do
           <EntitySetMapping Name="UserInfoes">
             <EntityTypeMapping TypeName="Employee_Management_SystemModel.UserInfo">
               <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="otp" ColumnName="otp" />
                 <ScalarProperty Name="userId" ColumnName="userId" />
                 <ScalarProperty Name="empId" ColumnName="empId" />
                 <ScalarProperty Name="userName" ColumnName="userName" />

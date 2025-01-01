@@ -200,6 +200,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SignUp\forgetPassword.cs" />
     <Compile Include="SignUp\Signup.cs" />
     <Compile Include="SignUp\Update.cs" />
     <Compile Include="SMTP\SendMail.cs" />

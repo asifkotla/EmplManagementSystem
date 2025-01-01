@@ -40,8 +40,8 @@ namespace EmplManagementSystem.SMTP
                 };
                 smtpClient.Send(message);
                 Utility.DisplaySuccessMessage("Mail Sent");
-                HR hr = new HR();
-                hr.HandleMainmenu(null);
+                //HR hr = new HR();
+                //hr.HandleMainmenu(null);
 
             }
             catch (Exception ex) 

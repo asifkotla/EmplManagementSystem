@@ -23,6 +23,7 @@ namespace EmplManagementSystem.Model
         public byte[] password { get; set; }
         public Nullable<int> roleId { get; set; }
         public bool isActive { get; set; }
+        public string otp { get; set; }
     
         public virtual Employee Employee { get; set; }
         public virtual Role Role { get; set; }

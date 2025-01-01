@@ -77,7 +77,7 @@ namespace EmplManagementSystem.SignUp
                         Utility.DisplayErrorMessage("This Username is already taken. Please choose another username.");
                         SignUp();
 
-
+                           
                     }
                     else if (existinguser.empId == empid)
                     {
@@ -134,6 +134,7 @@ namespace EmplManagementSystem.SignUp
 
                     Console.WriteLine("Enter User Name:");
                     string uname = Console.ReadLine();
+                    name = uname;
                     Console.WriteLine("Enter Password:");
                     string pass = Console.ReadLine();
                     Console.WriteLine("Enter Role id");
@@ -205,6 +206,32 @@ namespace EmplManagementSystem.SignUp
                 Console.Clear();
                 Console.WriteLine("\nMaximum login attempts reached.");
                 Console.WriteLine("1. Forget Password\n2. Back");
+                int choice=int.Parse(Console.ReadLine());
+                switch (choice)
+                {
+                    case 1:
+                        var obj = dbo.UserInfoes.FirstOrDefault(x => x.userName == name);
+                        if (obj != null)
+                        {
+                            forgetPassword forgetPassword=new forgetPassword();
+                            forgetPassword.frgtpass(obj.userName);
+                        }
+                        else
+                        {
+                            Utility.DisplayErrorMessage("User not Found");
+                            IsLogin();
+                        }
+                        break;
+                    case 2:
+                        IsLogin();
+                        break;
+                    default:
+                        Utility.DisplayErrorMessage("Invalid Choice ");
+                        IsLogin();
+                        break;
+                }
+
+                
                 return false;
 
 
