@@ -221,6 +221,9 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Database\Report Stored Procedures.sql" />
+    <Content Include="Database\Tables.sql" />
+    <Content Include="Database\test Data.sql" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Model1.edmx</DependentUpon>
