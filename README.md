@@ -123,10 +123,14 @@ CREATE TABLE Employees (
 
 ## Future Enhancements
 
-1. Role-based access control for improved security.
-2. Integration with cloud-based services for scalability.
-3. Advanced analytics and reporting dashboards.
-4. Automated onboarding workflows.
+1.Enhancements include role-based access control for security, 
+2.cloud service integration,
+3.and advanced analytics for better insights.
+4.Migrate Console Application to Web Application using ASP.NET and MVC
+5.Use WEB API for Notifications On Contact Numbers
+6.Additional features like attendance tracking, Leave Management will be added.
+
+
 
 ---
 
