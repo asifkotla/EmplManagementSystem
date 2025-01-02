@@ -1,56 +1,59 @@
-Here’s the updated presentation with the added feature:
+# Employee Management System
+
+## Overview
+The Employee Management System is a comprehensive solution designed to streamline employee data management. It provides functionality for creating, reading, updating, and deleting (CRUD) employee records while incorporating additional features like email notifications and search capabilities. The system is scalable, secure, and user-friendly, making it an ideal choice for organizations of all sizes.
 
 ---
 
-### **Slide 1: Title Slide**  
-**Title:** Employee Management System  
-**Subtitle:** Streamlining Employee Data Management  
+## Features
+
+1. **CRUD Operations**
+   - Add, update, view, and delete employee records.
+
+2. **Email Notifications**
+   - Password recovery for users.
+   - Notifications for new hires.
+
+3. **Employee Search Functionality**
+   - Search employees by ID, Name, or Joining Date.
+
+4. **Role-Based Dashboards**
+   - Different views for Admin, Manager, HR, and Employees.
+
+5. **Security Features**
+   - Password validation and hashing.
+   - Secure credential verification.
 
 ---
 
-### **Slide 2: Introduction**  
-**Why Employee Management System?**  
-- Centralized solution for managing employee information.  
-- Automates key tasks like notifications and validations.  
-- Scalable design for organizations of all sizes.  
+## Technologies Used
+
+- **Programming Language:** C#
+- **Framework:** .NET Core & Entity Framework Core
+- **Database:** SQL Server
+- **Email Service:** SMTP Server
 
 ---
 
-### **Slide 3: Features**  
-- **CRUD Operations:** Add, update, view, and delete employee records.  
-- **Email Notifications:**  
-  - Password recovery.  
-  - Notifications for new hires.  
-- **Employee Search Functionality:**  
-  - Search by ID, Name, and Joining Date.  
-- **Role-Based Dashboards:**  
-  - Separate views for Admin, Manager, HR, and Employees.  
-- **Security Features:**  
-  - Validate and hash passwords.  
-  - Verify credentials securely.  
+## System Architecture
+
+1. **Model Layer**
+   - Handles data representation.
+
+2. **Logic Layer**
+   - Implements application logic and workflows.
+
+3. **Data Access Layer**
+   - Interfaces with SQL Server using Entity Framework Core.
+
+4. **Email Integration Layer**
+   - Handles notifications via SMTP.
 
 ---
 
-### **Slide 4: Technologies Used**  
-- **Programming Language:** C#  
-- **Framework:** .NET Core & Entity Framework Core  
-- **Database:** SQL Server  
-- **Email Service:** SMTP Server  
+## Key Components
 
----
-
-### **Slide 5: System Architecture**  
-**Core Layers:**  
-1. **Model Layer:** Handles data representation.  
-2. **Business Logic Layer:** Implements application logic and workflows.  
-3. **Data Access Layer:** Interfaces with SQL Server using Entity Framework Core.  
-4. **Email Integration Layer:** Handles notifications via SMTP.  
-
----
-
-### **Slide 6: Key Components**  
-
-#### **Model Example:**  
+### **Model Example**
 ```csharp
 public class Employee
 {
@@ -62,7 +65,7 @@ public class Employee
 }
 ```
 
-#### **Search Functionality:**  
+### **Search Functionality**
 ```csharp
 public IEnumerable<Employee> SearchEmployees(string searchType, string searchValue)
 {
@@ -82,7 +85,7 @@ public IEnumerable<Employee> SearchEmployees(string searchType, string searchVal
 }
 ```
 
-#### **Email Service:**  
+### **Email Service**
 ```csharp
 public void SendEmail(SendMail sendMail)
 {
@@ -105,7 +108,7 @@ public void SendEmail(SendMail sendMail)
 }
 ```
 
-#### **Database Schema:**  
+### **Database Schema**
 ```sql
 CREATE TABLE Employees (
     Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -118,19 +121,25 @@ CREATE TABLE Employees (
 
 ---
 
-### **Slide 7: Future Enhancements**  
-- Role-based access control for improved security.  
-- Integration with cloud-based services for scalability.  
-- Advanced analytics and reporting dashboards.  
-- Automated onboarding workflows.  
+## Future Enhancements
+
+1. Role-based access control for improved security.
+2. Integration with cloud-based services for scalability.
+3. Advanced analytics and reporting dashboards.
+4. Automated onboarding workflows.
 
 ---
 
-### **Slide 8: Thank You!**  
-**Q&A:**  
-- We appreciate your time and look forward to your feedback.  
-- Feel free to ask questions about the design or implementation.  
+## Getting Started
 
----
+### Prerequisites
 
-Let me know if you'd like further refinements!
+- Visual Studio 2022 or later.
+- .NET Core SDK.
+- SQL Server.
+- SMTP server credentials.
+
+
+## Acknowledgments
+
+- Special thanks to the open-source community for their tools and libraries.
