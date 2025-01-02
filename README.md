@@ -143,3 +143,23 @@ CREATE TABLE Employees (
 ## Acknowledgments
 
 - Special thanks to the open-source community for their tools and libraries.
+
+  Here’s a note you can include:  
+
+---
+
+**Note:**  
+To enable the SMTP email functionality in this project, you need to replace the placeholders in the following lines of code with your own email address and app password:  
+
+```csharp
+string fromemail = "Your Email";  
+string frompass = "Your App Password";  
+```
+
+### Steps:
+1. **Email Address**: Use the email address you want to send emails from. Ensure this account is configured to allow SMTP access.  
+2. **App Password**: Generate an app password for your email account instead of using your main password.  
+   - For Gmail: Go to your Google Account > Security > App Passwords, and create an app password.  
+   - For other providers: Check their documentation on enabling SMTP and generating app passwords.  
+
+> **Caution:** Never hard-code sensitive credentials in production. Use environment variables or secure storage for better security.
