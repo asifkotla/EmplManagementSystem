@@ -1,114 +1,136 @@
-## Employee Management System
+Here’s the updated presentation with the added feature:
 
-### Slide 1: Introduction
+---
+
+### **Slide 1: Title Slide**  
 **Title:** Employee Management System  
-**Subtitle:** Efficient Employee Data Management
+**Subtitle:** Streamlining Employee Data Management  
 
-### Slide 2: Features
-- Perform Create, Read, Update, Delete (CRUD) operations for employees.
-- Integrates SMTP server for email notifications:
-  - Password recovery functionality for users.
-  - Notifications when HR adds a new employee.
-- Designed for scalability and ease of use.
+---
 
-### Slide 3: Technologies Used
-- **Programming Language:** C#
-- **Framework:** Entity Framework Core
-- **Database:** SQL Server
-- **Email Integration:** SMTP Server
+### **Slide 2: Introduction**  
+**Why Employee Management System?**  
+- Centralized solution for managing employee information.  
+- Automates key tasks like notifications and validations.  
+- Scalable design for organizations of all sizes.  
 
-### Slide 4: Architecture
-- **Core Components:**
-  - C# for business logic and application development.
-  - Entity Framework Core for Object-Relational Mapping (ORM).
-  - SQL Server for data storage and management.
-  - SMTP integration for email functionality.
+---
 
-### Slide 5: Key Components
-#### **Model:**
+### **Slide 3: Features**  
+- **CRUD Operations:** Add, update, view, and delete employee records.  
+- **Email Notifications:**  
+  - Password recovery.  
+  - Notifications for new hires.  
+- **Employee Search Functionality:**  
+  - Search by ID, Name, and Joining Date.  
+- **Role-Based Dashboards:**  
+  - Separate views for Admin, Manager, HR, and Employees.  
+- **Security Features:**  
+  - Validate and hash passwords.  
+  - Verify credentials securely.  
+
+---
+
+### **Slide 4: Technologies Used**  
+- **Programming Language:** C#  
+- **Framework:** .NET Core & Entity Framework Core  
+- **Database:** SQL Server  
+- **Email Service:** SMTP Server  
+
+---
+
+### **Slide 5: System Architecture**  
+**Core Layers:**  
+1. **Model Layer:** Handles data representation.  
+2. **Business Logic Layer:** Implements application logic and workflows.  
+3. **Data Access Layer:** Interfaces with SQL Server using Entity Framework Core.  
+4. **Email Integration Layer:** Handles notifications via SMTP.  
+
+---
+
+### **Slide 6: Key Components**  
+
+#### **Model Example:**  
 ```csharp
 public class Employee
 {
     public int Id { get; set; }
     public string Name { get; set; }
+    public DateTime JoiningDate { get; set; }
     public string Department { get; set; }
     public decimal Salary { get; set; }
 }
 ```
 
-#### **Controller:**
+#### **Search Functionality:**  
 ```csharp
-[ApiController]
-[Route("api/[controller]")]
-public class EmployeeController : ControllerBase
+public IEnumerable<Employee> SearchEmployees(string searchType, string searchValue)
 {
-    private readonly EmployeeContext _context;
-
-    public EmployeeController(EmployeeContext context)
+    switch (searchType.ToLower())
     {
-        _context = context;
-    }
-
-    [HttpGet]
-    public IActionResult GetEmployees() => Ok(_context.Employees.ToList());
-
-    [HttpPost]
-    public IActionResult AddEmployee(Employee employee)
-    {
-        _context.Employees.Add(employee);
-        _context.SaveChanges();
-
-        // Send email notification
-        EmailService.SendNotification("HR@company.com", "New Employee Added", $"Employee {employee.Name} has been added.");
-
-        return CreatedAtAction(nameof(GetEmployees), new { id = employee.Id }, employee);
+        case "id":
+            int id = int.Parse(searchValue);
+            return dbo.Employees.Where(e => e.Id == id);
+        case "name":
+            return dbo.Employees.Where(e => e.Name.Contains(searchValue));
+        case "joiningdate":
+            DateTime date = DateTime.Parse(searchValue);
+            return dbo.Employees.Where(e => e.JoiningDate == date);
+        default:
+            return Enumerable.Empty<Employee>();
     }
 }
 ```
 
-#### **Email Service:**
+#### **Email Service:**  
 ```csharp
-public static class EmailService
+public void SendEmail(SendMail sendMail)
 {
-    public static void SendNotification(string to, string subject, string body)
+    MailMessage message = new MailMessage
     {
-        var smtpClient = new SmtpClient("smtp.server.com")
-        {
-            Port = 587,
-            Credentials = new NetworkCredential("your_email", "your_password"),
-            EnableSsl = true,
-        };
+        From = new MailAddress("employeeemanagementsystem@gmail.com"),
+        Subject = sendMail.Subject,
+        Body = sendMail.Body,
+        IsBodyHtml = true
+    };
+    message.To.Add(new MailAddress(sendMail.ToEmail));
 
-        var mailMessage = new MailMessage
-        {
-            From = new MailAddress("noreply@company.com"),
-            Subject = subject,
-            Body = body,
-            IsBodyHtml = true,
-        };
-        mailMessage.To.Add(to);
-
-        smtpClient.Send(mailMessage);
-    }
+    var smtpClient = new SmtpClient("smtp.gmail.com")
+    {
+        Port = 587,
+        Credentials = new NetworkCredential("employeeemanagementsystem@gmail.com", "password"),
+        EnableSsl = true
+    };
+    smtpClient.Send(message);
 }
 ```
 
-#### **Database Schema:**
+#### **Database Schema:**  
 ```sql
 CREATE TABLE Employees (
     Id INT IDENTITY(1,1) PRIMARY KEY,
     Name NVARCHAR(100),
+    JoiningDate DATE,
     Department NVARCHAR(50),
     Salary DECIMAL(18, 2)
 );
 ```
 
-### Slide 6: Future Enhancements
-- Add role-based access control.
-- Implement advanced analytics dashboards.
-- Enhance email functionality for more triggers.
+---
 
-### Slide 7: Thank You
-- Thank you for your attention!  
-- Feel free to ask any questions about the project.
+### **Slide 7: Future Enhancements**  
+- Role-based access control for improved security.  
+- Integration with cloud-based services for scalability.  
+- Advanced analytics and reporting dashboards.  
+- Automated onboarding workflows.  
 
+---
+
+### **Slide 8: Thank You!**  
+**Q&A:**  
+- We appreciate your time and look forward to your feedback.  
+- Feel free to ask questions about the design or implementation.  
+
+---
+
+Let me know if you'd like further refinements!
