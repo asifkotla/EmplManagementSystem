@@ -532,11 +532,6 @@ warning 6002: The table/view 'Employee_Management_System.dbo.employeeDetails' do
             <End Role="Role" EntitySet="Roles" />
             <End Role="UserInfo" EntitySet="UserInfoes" />
           </AssociationSet>
-          <EntitySet Name="dtlForAdmins" EntityType="Employee_Management_SystemModel.dtlForAdmin" />
-          <EntitySet Name="dtlForEmpls" EntityType="Employee_Management_SystemModel.dtlForEmpl" />
-          <EntitySet Name="dtlForHRs" EntityType="Employee_Management_SystemModel.dtlForHR" />
-          <EntitySet Name="dtlForManagers" EntityType="Employee_Management_SystemModel.dtlForManager" />
-          <EntitySet Name="employeeDetails" EntityType="Employee_Management_SystemModel.employeeDetail" />
           <FunctionImport Name="DepartmentWiseEmployeeReport" ReturnType="Collection(Employee_Management_SystemModel.DepartmentWiseEmployeeReport_Result)" />
           <FunctionImport Name="EmployeeOverview" ReturnType="Collection(Employee_Management_SystemModel.EmployeeOverview_Result)" />
           <FunctionImport Name="GetEmployeePerformanceReportByDepartment" ReturnType="Collection(Employee_Management_SystemModel.GetEmployeePerformanceReportByDepartment_Result)">
@@ -595,69 +590,12 @@ warning 6002: The table/view 'Employee_Management_System.dbo.employeeDetails' do
           <FunctionImport Name="Pr_TopPerformers" ReturnType="Collection(Employee_Management_SystemModel.Pr_TopPerformers_Result)" />
           <FunctionImport Name="Pr_DepartmentHeadCount1" ReturnType="Collection(Employee_Management_SystemModel.Pr_DepartmentHeadCount1_Result)" />
           <FunctionImport Name="Pr_Resigned" ReturnType="Collection(Employee_Management_SystemModel.Pr_Resigned_Result)" />
+          <EntitySet Name="dtlForAdmins" EntityType="Employee_Management_SystemModel.dtlForAdmin" />
+          <EntitySet Name="dtlForEmpls" EntityType="Employee_Management_SystemModel.dtlForEmpl" />
+          <EntitySet Name="dtlForHRs" EntityType="Employee_Management_SystemModel.dtlForHR" />
+          <EntitySet Name="dtlForManagers" EntityType="Employee_Management_SystemModel.dtlForManager" />
+          <EntitySet Name="employeeDetails" EntityType="Employee_Management_SystemModel.employeeDetail" />
         </EntityContainer>
-        <EntityType Name="dtlForAdmin">
-          <Key>
-            <PropertyRef Name="Role" />
-            <PropertyRef Name="EmpName" />
-            <PropertyRef Name="Email" />
-            <PropertyRef Name="Contact" />
-            <PropertyRef Name="empId" />
-            <PropertyRef Name="Department" />
-          </Key>
-          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="EmpName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Contact" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="empId" Type="Int32" Nullable="false" />
-          <Property Name="Department" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="dtlForEmpl">
-          <Key>
-            <PropertyRef Name="Employee_Name" />
-            <PropertyRef Name="Department" />
-            <PropertyRef Name="Email" />
-          </Key>
-          <Property Name="Employee_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Department" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="dtlForHR">
-          <Key>
-            <PropertyRef Name="Employee_Name" />
-            <PropertyRef Name="Department" />
-            <PropertyRef Name="Email" />
-            <PropertyRef Name="Contact" />
-          </Key>
-          <Property Name="Employee_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Department" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Contact" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="EmpSalary" Type="Decimal" Precision="10" Scale="2" />
-        </EntityType>
-        <EntityType Name="dtlForManager">
-          <Key>
-            <PropertyRef Name="Employee_Name" />
-            <PropertyRef Name="Department" />
-            <PropertyRef Name="Email" />
-            <PropertyRef Name="Contact" />
-          </Key>
-          <Property Name="Employee_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Department" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Contact" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="employeeDetail">
-          <Key>
-            <PropertyRef Name="Employee_Name" />
-            <PropertyRef Name="Department_Name" />
-            <PropertyRef Name="Email" />
-          </Key>
-          <Property Name="Employee_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Department_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-        </EntityType>
         <ComplexType Name="DepartmentWiseEmployeeReport_Result">
           <Property Type="String" Name="Department" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="empId" Nullable="false" />
@@ -829,6 +767,68 @@ warning 6002: The table/view 'Employee_Management_System.dbo.employeeDetails' do
           <Property Type="String" Name="Employee_Name" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="Total_Tasks_Completed" Nullable="true" />
         </ComplexType>
+        <EntityType Name="dtlForAdmin">
+          <Key>
+            <PropertyRef Name="empId" />
+            <PropertyRef Name="Role" />
+            <PropertyRef Name="EmpName" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Department" />
+            <PropertyRef Name="Contact" />
+          </Key>
+          <Property Name="empId" Type="Int32" Nullable="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmpName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Department" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dtlForEmpl">
+          <Key>
+            <PropertyRef Name="Employee_Name" />
+            <PropertyRef Name="Department" />
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="Employee_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Department" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="dtlForHR">
+          <Key>
+            <PropertyRef Name="Employee_Name" />
+            <PropertyRef Name="Department" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Contact" />
+          </Key>
+          <Property Name="Employee_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Department" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="EmpSalary" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="dtlForManager">
+          <Key>
+            <PropertyRef Name="Employee_Name" />
+            <PropertyRef Name="Department" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Contact" />
+          </Key>
+          <Property Name="Employee_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Department" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="employeeDetail">
+          <Key>
+            <PropertyRef Name="Employee_Name" />
+            <PropertyRef Name="Department_Name" />
+            <PropertyRef Name="Email" />
+          </Key>
+          <Property Name="Employee_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Department_Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -904,58 +904,6 @@ warning 6002: The table/view 'Employee_Management_System.dbo.employeeDetails' do
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="roleId" ColumnName="roleId" />
                 <ScalarProperty Name="isActive" ColumnName="isActive" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="dtlForAdmins">
-            <EntityTypeMapping TypeName="Employee_Management_SystemModel.dtlForAdmin">
-              <MappingFragment StoreEntitySet="dtlForAdmin">
-                <ScalarProperty Name="Department" ColumnName="Department" />
-                <ScalarProperty Name="empId" ColumnName="empId" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="Contact" ColumnName="Contact" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
-                <ScalarProperty Name="Role" ColumnName="Role" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="dtlForEmpls">
-            <EntityTypeMapping TypeName="Employee_Management_SystemModel.dtlForEmpl">
-              <MappingFragment StoreEntitySet="dtlForEmpl">
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
-                <ScalarProperty Name="Employee_Name" ColumnName="Employee_Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="dtlForHRs">
-            <EntityTypeMapping TypeName="Employee_Management_SystemModel.dtlForHR">
-              <MappingFragment StoreEntitySet="dtlForHR">
-                <ScalarProperty Name="EmpSalary" ColumnName="EmpSalary" />
-                <ScalarProperty Name="Contact" ColumnName="Contact" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
-                <ScalarProperty Name="Employee_Name" ColumnName="Employee_Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="dtlForManagers">
-            <EntityTypeMapping TypeName="Employee_Management_SystemModel.dtlForManager">
-              <MappingFragment StoreEntitySet="dtlForManager">
-                <ScalarProperty Name="Contact" ColumnName="Contact" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Department" ColumnName="Department" />
-                <ScalarProperty Name="Employee_Name" ColumnName="Employee_Name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="employeeDetails">
-            <EntityTypeMapping TypeName="Employee_Management_SystemModel.employeeDetail">
-              <MappingFragment StoreEntitySet="employeeDetails">
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
-                <ScalarProperty Name="Employee_Name" ColumnName="Employee_Name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1098,6 +1046,58 @@ warning 6002: The table/view 'Employee_Management_System.dbo.employeeDetails' do
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="dtlForAdmins">
+            <EntityTypeMapping TypeName="Employee_Management_SystemModel.dtlForAdmin">
+              <MappingFragment StoreEntitySet="dtlForAdmin">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmpName" ColumnName="EmpName" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="empId" ColumnName="empId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dtlForEmpls">
+            <EntityTypeMapping TypeName="Employee_Management_SystemModel.dtlForEmpl">
+              <MappingFragment StoreEntitySet="dtlForEmpl">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Employee_Name" ColumnName="Employee_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dtlForHRs">
+            <EntityTypeMapping TypeName="Employee_Management_SystemModel.dtlForHR">
+              <MappingFragment StoreEntitySet="dtlForHR">
+                <ScalarProperty Name="EmpSalary" ColumnName="EmpSalary" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Employee_Name" ColumnName="Employee_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="dtlForManagers">
+            <EntityTypeMapping TypeName="Employee_Management_SystemModel.dtlForManager">
+              <MappingFragment StoreEntitySet="dtlForManager">
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="Employee_Name" ColumnName="Employee_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employeeDetails">
+            <EntityTypeMapping TypeName="Employee_Management_SystemModel.employeeDetail">
+              <MappingFragment StoreEntitySet="employeeDetails">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Department_Name" ColumnName="Department_Name" />
+                <ScalarProperty Name="Employee_Name" ColumnName="Employee_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

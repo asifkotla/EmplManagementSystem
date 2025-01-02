@@ -67,14 +67,14 @@ namespace EmplManagementSystem.Admin_Dashboard
                         var w = int.Parse(Console.ReadLine());
                         if (w == 1)
                         {
-                            Console.WriteLine("Enter Employee Id ");
+                            Console.Write("Enter Employee Id : ");
                             int id = int.Parse(Console.ReadLine());
                             SearchbyIdName search = new SearchbyIdName();
                             search.SearchbyId(id);
                         }
                         else if (w == 2)
                         {
-                            Console.WriteLine("Enter Employee Name");
+                            Console.Write("Enter Employee Name : ");
                             string name = Console.ReadLine();
                             SearchbyIdName search = new SearchbyIdName();
                             search.SearchbyName(name);
@@ -292,13 +292,14 @@ namespace EmplManagementSystem.Admin_Dashboard
                         case 6:
                             HandleMainmenu(Username);
                             break;
-                        default: HandleMainmenu(Username);
+                        default:
+                            HandleMainmenu(Username);
                             break;
                     }
                     break;
-                    default:Utility.DisplayErrorMessage("Invalid Choise");
-                    HandleMainmenu(Username);
-                    break;
+                    //default:Utility.DisplayErrorMessage("Invalid Choise");
+                    //HandleMainmenu(Username);
+                    //break;
                  
             }
 

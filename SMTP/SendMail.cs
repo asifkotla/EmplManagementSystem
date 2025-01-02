@@ -47,8 +47,7 @@ namespace EmplManagementSystem.SMTP
             catch (Exception ex) 
                 {
                     Console.WriteLine("Something Went Wrong"+ex.Message);
-                    HR hr = new HR();
-                    hr.HandleMainmenu(null);
+                   
                 }
       
         }

@@ -4,8 +4,7 @@ using EmplManagementSystem.SMTP;
 using EmplManagementSystem.Utility1;
 using System;
 using System.Data.Entity;
-using System.Linq; // For .Include if using EF
-
+using System.Linq; 
 namespace EmplManagementSystem.HR_Dashboard
 {
     internal class ADDEMPL

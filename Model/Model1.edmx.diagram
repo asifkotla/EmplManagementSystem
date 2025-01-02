@@ -18,11 +18,11 @@
         <AssociationConnector Association="Employee_Management_SystemModel.FK_UserInfo_Employee" ManuallyRouted="false" />
         <AssociationConnector Association="Employee_Management_SystemModel.FK__Report__taskId__5CD6CB2B" ManuallyRouted="false" />
         <AssociationConnector Association="Employee_Management_SystemModel.FK__UserInfo__roleId__6A30C649" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="Employee_Management_SystemModel.dtlForAdmin" Width="1.5" PointX="5.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Employee_Management_SystemModel.dtlForEmpl" Width="1.5" PointX="7.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Employee_Management_SystemModel.dtlForHR" Width="1.5" PointX="7.75" PointY="3.75" />
-        <EntityTypeShape EntityType="Employee_Management_SystemModel.dtlForManager" Width="1.5" PointX="9.75" PointY="0.75" />
-        <EntityTypeShape EntityType="Employee_Management_SystemModel.employeeDetail" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="Employee_Management_SystemModel.dtlForAdmin" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Employee_Management_SystemModel.dtlForEmpl" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Employee_Management_SystemModel.dtlForHR" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="Employee_Management_SystemModel.dtlForManager" Width="1.5" PointX="2.75" PointY="9.75" />
+        <EntityTypeShape EntityType="Employee_Management_SystemModel.employeeDetail" Width="1.5" PointX="9.75" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

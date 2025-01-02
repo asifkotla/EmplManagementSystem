@@ -8,6 +8,7 @@ using System.Linq;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
+using Task = EmplManagementSystem.Model.Task;
 
 
 namespace EmplManagementSystem.ManagerDashboard
@@ -39,32 +40,45 @@ namespace EmplManagementSystem.ManagerDashboard
             switch (n)
             {
                 case 1:
-                    Console.Write("Task Name : ");
-                    string tasknm= Console.ReadLine();
-                    Console.WriteLine("Task Description :");
-                    string tdes= Console.ReadLine();
-                    Console.WriteLine("Add Deadline To Task");
-                    DateTime date=DateTime.Parse(Console.ReadLine());
-                    Console.WriteLine("Assign To EmpID :");
-                    int empid=int.Parse(Console.ReadLine());
-                    Model.Task task = new Model.Task()
+                    Console.Write("Task Name: ");
+                    string tasknm = Console.ReadLine();
+
+                    Console.WriteLine("Task Description:");
+                    string tdes = Console.ReadLine();
+
+                    Console.WriteLine("Add Deadline To Task:");
+                    DateTime date = DateTime.Parse(Console.ReadLine());
+
+                    Console.WriteLine("Assign To EmpID:");
+                    int empid = int.Parse(Console.ReadLine());
+
+                    Task task = new Task()
                     {
                         taskName = tasknm,
-                        Description= tdes,
-                        deadLine=date,
-                        empId=empid,
-                        Status="Pending"
-
+                        Description = tdes,
+                        deadLine = date,
+                        empId = empid,
+                        Status = "Pending"
                     };
-                    int q=dbo.SaveChanges();
-                    if(n>0)
+
+                    try
                     {
-                        Utility.DisplaySuccessMessage("Task Assinged Successfully");
-                        HandleMainmenu(Username);
+                        dbo.Tasks.Add(task);
+                        int q = dbo.SaveChanges();
+                        if (q > 0)
+                        {
+                            Utility.DisplaySuccessMessage("Task Assigned Successfully");
+                            HandleMainmenu(Username);
+                        }
+                        else
+                        {
+                            Utility.DisplayErrorMessage("Something Went Wrong, Please Try Again");
+                            HandleMainmenu(Username);
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        Utility.DisplayErrorMessage("Something Went Wrong Please Try Again");
+                        Utility.DisplayErrorMessage($"Error: {ex.Message}");
                         HandleMainmenu(Username);
                     }
 
