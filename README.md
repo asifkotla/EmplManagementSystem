@@ -122,14 +122,20 @@ CREATE TABLE Employees (
 ---
 
 ## Future Enhancements
+1. Enhancements include role-based access control for security.
+2. Cloud service integration.
+3. Advanced analytics for better insights.
+4. Migrate Console Application to Web Application using ASP.NET and MVC.
+5. Use WEB API for Notifications on Contact Numbers.
+6. Additional features like attendance tracking and leave management will be added.
 
-1.Enhancements include role-based access control for security, 
-2.cloud service integration,
-3.and advanced analytics for better insights.
-4.Migrate Console Application to Web Application using ASP.NET and MVC
-5.Use WEB API for Notifications On Contact Numbers
-6.Additional features like attendance tracking, Leave Management will be added.
+## Usage
+1. Replace the placeholders in the SMTP configuration with your email and app password.
+2. Run the application to perform employee management operations.
+3. Explore the dashboards and utilize features based on your role.
 
+## Contributing
+Contributions are welcome! Feel free to submit issues or pull requests for improvements or bug fixes.
 
 
 ---
