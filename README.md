@@ -118,6 +118,132 @@ CREATE TABLE Employees (
     Salary DECIMAL(18, 2)
 );
 ```
+Here's an updated section for the **README.md** file to include details about the **Task Module**:
+
+---
+
+### **Task Module**
+
+The Task Module in the Employee Management System is designed to manage and monitor tasks assigned to employees. It provides features for tracking task progress, deadlines, and status updates.
+
+#### **Key Features**
+- **Task Assignment**: Assign tasks to specific employees based on their roles or departments.
+- **Status Tracking**: Monitor the status of tasks with predefined statuses like `Pending`, `InProgress`, and `Completed`.
+- **Deadline Management**: Set and track task deadlines to ensure timely completion.
+- **Task Reports**: Generate reports to analyze task completion rates and identify overdue tasks.
+- **Incentive Integration**: Automatically calculate and add incentives for employees upon task completion.
+
+#### **Database Schema**
+```sql
+CREATE TABLE Task (
+    taskId INT IDENTITY(1,1) PRIMARY KEY,
+    taskName NVARCHAR(100) NOT NULL,
+    description NVARCHAR(255),
+    status NVARCHAR(20) CHECK (status IN ('Pending', 'InProgress', 'Completed')) NOT NULL,
+    deadline DATE NOT NULL,
+    empId INT FOREIGN KEY REFERENCES Employee(empId) ON DELETE SET NULL
+);
+```
+
+#### **Key Methods**
+1. **Assign Task**  
+   Assign tasks to employees with necessary details such as description, status, and deadline.
+
+2. **Update Task Status**  
+   Allows HR and Managers to update the status of a task as it progresses.
+
+3. **Overdue Task Detection**  
+   Automatically detect tasks that are overdue based on the current date and provide alerts or notifications.
+
+4. **Task Completion Report**  
+   Generate detailed reports on completed and pending tasks for individual employees or departments.
+
+#### **Example Usage**
+```csharp
+// Assigning a task to an employee
+Task newTask = new Task {
+    taskName = "Complete Documentation",
+    description = "Prepare the project documentation for submission.",
+    status = "Pending",
+    deadline = DateTime.Parse("2025-04-15"),
+    empId = 110 // Assigned to Employee ID 110
+};
+dbo.Tasks.Add(newTask);
+dbo.SaveChanges();
+```
+
+Here's an updated section for the **README.md** file to include details about the **Report Generation Module**:
+
+---
+
+### **Report Generation Module**
+
+The Report Generation Module is a key feature of the Employee Management System, enabling Admin, HR, and Managers to generate insightful reports for monitoring and decision-making. This module ensures transparency and provides a detailed view of employee and organizational performance.
+
+#### **Key Features**
+- **Department-Wise Reports**: View employee distribution, salaries, and performance metrics by department.
+- **Employee Performance Reports**: Analyze task completion and efficiency for individual employees.
+- **Salary Reports**: Generate salary distribution reports, including gross, deductions, and net salary details.
+- **Task Status Reports**: Monitor pending, in-progress, and completed tasks organization-wide.
+- **Role-Based Access**: Reports are customized based on user roles (Admin, HR, Manager).
+
+#### **Database Integration**
+The report module uses stored procedures for efficient data retrieval and analysis. Examples include:
+```sql
+-- Employee Details by Department
+CREATE PROCEDURE Pr_EmplDetailsDeptWise (@deptName NVARCHAR(50))
+AS
+BEGIN
+    SELECT 
+        e.empName AS Employee_Name,
+        u.email AS Email,
+        d.deptName AS Department
+    FROM 
+        Employee e
+    JOIN 
+        Department d ON e.deptId = d.deptId
+    JOIN 
+        UserInfo u ON e.empId = u.empId
+    WHERE 
+        d.deptName = @deptName
+    ORDER BY 
+        e.empName;
+END;
+```
+
+#### **Key Reports**
+1. **Department Headcount Report**  
+   Displays the number of employees in each department.
+
+2. **Salary Distribution Report**  
+   Summarizes salary data across departments, including total and average salaries.
+
+3. **Task Completion Report**  
+   Provides insights into task status for employees, departments, or the organization as a whole.
+
+4. **Performance Report**  
+   Tracks individual and departmental performance metrics based on task completion.
+
+5. **Resigned Employees Report**  
+   Lists details of employees who have resigned, along with pending tasks.
+
+#### **Example Usage**
+```csharp
+// Generate a department-wise employee report
+Console.WriteLine("Enter Department Name:");
+string departmentName = Console.ReadLine();
+var report = dbo.Pr_EmplDetailsDeptWise(departmentName).ToList();
+
+foreach (var item in report)
+{
+    Console.WriteLine($"Employee: {item.Employee_Name}, Email: {item.Email}, Department: {item.Department}");
+}
+```
+
+#### **Benefits**
+- **Data-Driven Decisions**: Facilitates strategic planning and decision-making.
+- **Time Efficiency**: Reduces manual effort in report creation with automated generation.
+- **Role-Specific Insights**: Tailored reports ensure relevant data is accessible to the right stakeholders.
 
 ---
 
