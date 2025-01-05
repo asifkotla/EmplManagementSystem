@@ -98,9 +98,14 @@ namespace EmplManagementSystem.SignUp
                         }
                         else
                         {
-                            Utility.DisplayErrorMessage("Something Went Wrong Plase Try Again");
+                            Utility.DisplayErrorMessage("Something Went Wrong Please Try");
                             frgtpass(name);
                         }
+                    }
+                    else
+                    {
+                        Utility.DisplayErrorMessage("Wrong OTP");
+                        frgtpass(name);
                     }
 
                 }

@@ -60,7 +60,8 @@ namespace EmplManagementSystem.HR_Dashboard
                 };
 
                 dbo.Employees.Add(employee);
-                if (dbo.SaveChanges() > 0)
+                int n=dbo.SaveChanges();
+                if (n > 0)
                 {
                     Utility.DisplaySuccessMessage("Added Employee Successfully");
 
@@ -98,7 +99,7 @@ namespace EmplManagementSystem.HR_Dashboard
                         }
                         catch (Exception ex)
                         {
-                            Utility.DisplayErrorMessage($"Failed to send email: {ex.Message}");
+                            Utility.DisplayErrorMessage($"Failed to send email Check Internet Connection: {ex.Message}");
                         }
                     }
                 }
