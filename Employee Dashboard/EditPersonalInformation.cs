@@ -18,6 +18,8 @@ namespace EmplManagementSystem.Employee_Dashboard
         int q;
         public void Edit(string name)
         {
+            Utility.Heading1();
+
             string name1 = name;
             
             var obj = dbo.UserInfoes.FirstOrDefault(x => x.userName == name);

@@ -50,6 +50,7 @@ namespace EmplManagementSystem.Utility1
         public static void DisplayErrorMessage(string message)
         {
             Console.Clear();
+            Utility.Heading1();
             Console.ForegroundColor = ConsoleColor.Red;
            Utility.Beepsound();
             Console.WriteLine(message);
@@ -60,6 +61,7 @@ namespace EmplManagementSystem.Utility1
         public static void DisplaySuccessMessage(string message)
         {
             Console.Clear();
+            Utility.Heading1();
             Console.ForegroundColor = ConsoleColor.Green;
             Utility.Beepsound();
             Console.WriteLine(message);
@@ -67,6 +69,65 @@ namespace EmplManagementSystem.Utility1
             Thread.Sleep(1200);
 
         }
-    }
+        public static string UsernameGenarator()
+        {
+            const string lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+            const string uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+           
+            StringBuilder charSet = new StringBuilder();
+            charSet.Append(lowercaseChars);
+            charSet.Append(uppercaseChars);
+            
 
+            int length = 10;
+            Random random = new Random();
+            StringBuilder username = new StringBuilder(length);
+
+            for (int i = 0; i < length; i++)
+            {
+                int index = random.Next(charSet.Length);
+                username.Append(charSet[index]);
+            }
+            return username.ToString(); 
+        }
+        public static string PasswordGenarator()
+        {
+            const string lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+            const string uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            const string digitChars = "0123456789";
+            const string specialChars = "!@#$%^&*";
+
+            StringBuilder charSet = new StringBuilder();
+            charSet.Append(lowercaseChars);
+            charSet.Append(uppercaseChars);
+            charSet.Append(digitChars);
+            charSet.Append(specialChars);
+
+            int length = 10;
+            Random random = new Random();
+            StringBuilder password = new StringBuilder(length);
+
+            for (int i = 0; i < length; i++)
+            {
+                int index = random.Next(charSet.Length);
+                password.Append(charSet[index]);
+            }
+            return password.ToString();
+        }
+        public static void Heading1()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("********************************************************");
+            Console.WriteLine("               EMPLOYEE MANAGEMENT SYSTEM               ");
+            Console.WriteLine("********************************************************\n");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+   
+
+       
+    }
+  
 }
+
+
+

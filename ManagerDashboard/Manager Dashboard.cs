@@ -33,7 +33,8 @@ namespace EmplManagementSystem.ManagerDashboard
         {   
             Console.Clear();
             int choice;
-            
+            Utility.Heading1();
+
             DisplayMenu();
             Console.Write("\nEnter Your Choice ");
             int n = int.Parse(Console.ReadLine());
@@ -85,6 +86,7 @@ namespace EmplManagementSystem.ManagerDashboard
                     break;
                 case 2:
                     Console.Clear();
+                    Utility.Heading1();
                     Console.WriteLine("1.Show All Employees\n2.Search\n3.Main Menu");
                     choice= int.Parse(Console.ReadLine());  
                     if(choice==1)
@@ -111,10 +113,12 @@ namespace EmplManagementSystem.ManagerDashboard
                     else if(choice==2)
                     {
                         Console.Clear();
+                        Utility.Heading1();
                         Console.WriteLine("1.Search By Id\n2.Search By Name\n3.Main Menu");
                         int choice1= int.Parse(Console.ReadLine());
                         if (choice1==1)
                         {
+                            
                             Searchmang search = new Searchmang();
                             Console.Write("Enter Employee Id : ");
                             int empid1=int.Parse(Console.ReadLine());
@@ -123,6 +127,7 @@ namespace EmplManagementSystem.ManagerDashboard
                         }
                         else if (choice1==2)
                         {
+                            Utility.Heading1();
                             Console.Write("Enter Employee Name :");
                             string name=Console.ReadLine();
                             Searchmang search1 = new Searchmang();

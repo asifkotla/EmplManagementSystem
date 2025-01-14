@@ -12,9 +12,11 @@ namespace EmplManagementSystem.HR_Dashboard
 {
     internal class Search : Isearch
     {
+
         Employee_Management_SystemEntities3 dbo = new Employee_Management_SystemEntities3();
         public void SearchbyId(int id)
         {
+            Utility.Heading1();
             var obj = dbo.UserInfoes.FirstOrDefault(x=>x.empId==id);
 
 
@@ -38,6 +40,7 @@ namespace EmplManagementSystem.HR_Dashboard
 
         public void SearchbyName(string id)
         {
+            Utility.Heading1();
             var obj = dbo.UserInfoes.FirstOrDefault(x => x.Employee.empName == id);
             if (obj != null)
             {
@@ -55,6 +58,7 @@ namespace EmplManagementSystem.HR_Dashboard
         }
         public void SearchByJoiningDate(DateTime date)
         {
+            Utility.Heading1();
             var obj = dbo.UserInfoes
      .Where(x => DbFunctions.TruncateTime(x.Employee.JoiningDate) == DbFunctions.TruncateTime(date))
      .ToList();

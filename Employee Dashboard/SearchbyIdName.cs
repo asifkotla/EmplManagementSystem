@@ -16,6 +16,7 @@ namespace EmplManagementSystem.Employee_Dashboard
 
         public void SearchbyId(int id)
         {
+            Utility.Heading1();
             var obj = dbo.UserInfoes.FirstOrDefault(x => x.empId== id);
 
             if (obj != null)
@@ -35,6 +36,7 @@ namespace EmplManagementSystem.Employee_Dashboard
 
         public void SearchbyName(string id)
         {
+            Utility.Heading1();
             var obj = dbo.UserInfoes.FirstOrDefault(x => x.Employee.empName == id);
             if (obj != null)
             {
