@@ -20,30 +20,31 @@ namespace EmplManagementSystem.SignUp
         Employee_Management_SystemEntities3 dbo = new Employee_Management_SystemEntities3();
         string name = "";
         
-        public bool SignUp()
+        public bool SignUp(int empid)
         {
             try
             {
-                Console.WriteLine("Enter Employee Id :");
-                int empid=int.Parse(Console.ReadLine());
-                Console.WriteLine("Enter username : ");
+                Utility.Heading1();
+
+                var emp = dbo.UserInfoes.FirstOrDefault(x => x.empId == empid);
+                Console.WriteLine("Enter New username : ");
                 string name = Console.ReadLine();
                 Console.WriteLine("Mobile Number :");
                 string mob = Console.ReadLine();
-                Console.WriteLine("Email :");
-                string email = Console.ReadLine();
+                //Console.WriteLine("Email :");
+                //string email = Console.ReadLine();
 
-                if (!Utility.IsValidEmail(email))
-                {
+                //if (!Utility.IsValidEmail(email))
+                //{
                   
-                    Utility.DisplayErrorMessage("Invalid email format.");
+                //    Utility.DisplayErrorMessage("Invalid email format.");
                    
-                    return false;
-                }
+                //    return false;
+                //}
 
-                Console.WriteLine("Address :");
+                Console.WriteLine(" Enter Address :");
                 string add = Console.ReadLine();
-                Console.WriteLine("Create Password :");
+                Console.WriteLine("Create New Password :");
                 string pass = Console.ReadLine();
 
                 if (!Utility.IsValidPassword(pass))
@@ -54,62 +55,58 @@ namespace EmplManagementSystem.SignUp
                     return false;
                 }
 
-                Console.WriteLine("Select Your Role:\n1. Admin\n2. HR\n3. Manager\n4. Employee");
-                if (!int.TryParse(Console.ReadLine(), out int role) || role < 1 || role > 4)
-                {
-                    Utility.DisplayErrorMessage("Wrong Choice. Please select a valid role.");
-                    return false;
-                }
+                //Console.WriteLine("Select Your Role:\n1. Admin\n2. HR\n3. Manager\n4. Employee");
+                //if (!int.TryParse(Console.ReadLine(), out int role) || role < 1 || role > 4)
+                //{
+                //    Utility.DisplayErrorMessage("Wrong Choice. Please select a valid role.");
+                //    return false;
+                //}
                 Console.Clear();
                 
 
 
-                var existinguser = dbo.UserInfoes.FirstOrDefault(x => x.userName == name || x.Email == email||x.empId==empid);
+                var existinguser = dbo.UserInfoes.FirstOrDefault(x => x.userName == name );
                 if (existinguser != null)
                 {
-                    if (existinguser.Email == email)
-                    {
-                        Utility.DisplayErrorMessage("This Email is already in use. Please choose another email.");
-                        SignUp();
-                    }
-                    else if (existinguser.userName == name)
+                    //if (existinguser.Email == email)
+                    //{
+                    //    Utility.DisplayErrorMessage("This Email is already in use. Please choose another email.");
+                    //    SignUp(username);
+                    //}
+                    if (existinguser.userName == name)
                     {
                         Utility.DisplayErrorMessage("This Username is already taken. Please choose another username.");
-                        SignUp();
-
-                           
+                        SignUp(empid);
+    
                     }
-                    else if (existinguser.empId == empid)
-                    {
-                        Utility.DisplayErrorMessage("This Employee Id is Already Resgister");
-                        SignUp();
-                    }
+                   
                     return false;
                 }
 
                 byte[] hashedPassword = Utility.HashPassword(pass);
 
-                UserInfo lg = new UserInfo();
-                lg.userName = name;
-                lg.empId = empid;
-                    lg.Mobile = mob;
-                    lg.Email = email;
-                    lg.address = add;
-                    lg.password = hashedPassword;
-                    lg.roleId = role;
-
-           
-
-                dbo.UserInfoes.Add(lg);
+                //UserInfo lg = new UserInfo();
+                //lg.userName = name;
+                ////lg.empId = empid;
+                //    lg.Mobile = mob;
+                //    //lg.Email = email;
+                //    lg.address = add;
+                //    lg.password = hashedPassword;
+                //    //lg.roleId = role;
+                //dbo.UserInfoes.Add(lg);
+                emp.userName = name;
+                emp.password = hashedPassword;
+                emp.Mobile=mob;
+                emp.address = add;
                 int n = dbo.SaveChanges();
                 if (n > 0)
                 {
-                    Utility.DisplaySuccessMessage("Sign up successfully.");
+                    Utility.DisplaySuccessMessage("Registration successfull.");
                     return true;
                 }
                 else
                 {
-                    Utility.DisplayErrorMessage("Unable to sign up.");
+                    Utility.DisplayErrorMessage("Registration Unsuccessfull.");
                     return false;
                 }
             }
@@ -132,12 +129,12 @@ namespace EmplManagementSystem.SignUp
 
 
 
-                    Console.WriteLine("Enter User Name:");
+                    Console.Write("Enter User Name : ");
                     string uname = Console.ReadLine();
                     name = uname;
-                    Console.WriteLine("Enter Password:");
+                    Console.Write("Enter Password : ");
                     string pass = Console.ReadLine();
-                    Console.WriteLine("Enter Role id");
+                    Console.Write("Enter Role id : ");
                     int r = int.Parse(Console.ReadLine());
 
                     // Fetch the user from the database
@@ -153,45 +150,50 @@ namespace EmplManagementSystem.SignUp
                             Console.Clear();
 
                             Utility.DisplaySuccessMessage("- - Login Successfull - - ");
-
-
-                            switch (user.roleId)
+                            if (hashedInputPassword.SequenceEqual(Utility.HashPassword("EMSpass@1234")))
                             {
-                                case 1:
-                                    Console.WriteLine("\nWelcome" + " " + user.userName + "...\n");
-                                    Admin admin = new Admin();
-                                    name = user.userName;
-                                    admin.HandleMainmenu(name);
-                                    break;
-
-                                case 2:
-
-                                    Console.WriteLine("\nWelcome" + " " + user.userName + "...\n");
-                                    HR hr = new HR();
-                                    name = user.userName;
-                                    hr.HandleMainmenu(name);
-
-                                    break;
-                                case 3:
-                                    Console.WriteLine("\nWelcome" + " " + user.userName + "...\n");
-                                    Manager manager = new Manager();
-                                    name = user.userName;
-                                    manager.HandleMainmenu(name);
-
-
-                                    break;
-                                case 4:
-                                    Console.WriteLine("\nWelcome" + " " + user.userName + "...\n");
-                                    EmployeeDashboard employeeDashboard = new EmployeeDashboard();
-                                    name = user.userName;
-                                    employeeDashboard.HandleMainmenu(name);
-                                    break;
-
-                                default:
-                                    Utility.DisplayErrorMessage("Invalid role assigned to user.");
-                                    break;
+                                SignUp(user.empId);
                             }
-                            return true;
+                            else
+                            {
+                                switch (user.roleId)
+                                {
+                                    case 1:
+                                        Console.WriteLine("\nWelcome" + " " + user.userName + "...\n");
+                                        Admin admin = new Admin();
+                                        name = user.userName;
+                                        admin.HandleMainmenu(name);
+                                        break;
+
+                                    case 2:
+
+                                        Console.WriteLine("\nWelcome" + " " + user.userName + "...\n");
+                                        HR hr = new HR();
+                                        name = user.userName;
+                                        hr.HandleMainmenu(name);
+
+                                        break;
+                                    case 3:
+                                        Console.WriteLine("\nWelcome" + " " + user.userName + "...\n");
+                                        Manager manager = new Manager();
+                                        name = user.userName;
+                                        manager.HandleMainmenu(name);
+
+
+                                        break;
+                                    case 4:
+                                        Console.WriteLine("\nWelcome" + " " + user.userName + "...\n");
+                                        EmployeeDashboard employeeDashboard = new EmployeeDashboard();
+                                        name = user.userName;
+                                        employeeDashboard.HandleMainmenu(name);
+                                        break;
+
+                                    default:
+                                        Utility.DisplayErrorMessage("Invalid role assigned to user.");
+                                        break;
+                                }
+                                return true;
+                            }
                         }
                     }
                     else

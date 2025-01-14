@@ -13,6 +13,7 @@ namespace EmplManagementSystem.HR_Dashboard
 
         public void AddEmployee()
         {
+            Utility.Heading1();
             try
             {
                 Console.Clear();
@@ -39,14 +40,26 @@ namespace EmplManagementSystem.HR_Dashboard
                 int mang = int.Parse(Console.ReadLine());
                 
                 Console.WriteLine("Enter Employee Email Address:");
-                string email;
-                while (true)
+                string email=Console.ReadLine();
+                if (!Utility.IsValidEmail(email))
                 {
-                    email = Console.ReadLine();
-                    if (Utility.IsValidEmail(email))
-                        break;
-
-                    Utility.DisplayErrorMessage("Invalid email format. Please try again:");
+                    Utility.DisplayErrorMessage("Invalid email format.");
+                    return;
+                }
+                var useremail=dbo.UserInfoes.FirstOrDefault(x => x.Email == email);
+                if (useremail != null)
+                {
+                    if (useremail.Email == email) 
+                    {
+                        Utility.DisplayErrorMessage("Email is Used Choose another email ");
+                        AddEmployee();
+                    }
+                }
+                Console.WriteLine("Select Your Role:\n1. Admin\n2. HR\n3. Manager\n4. Employee");
+                if (!int.TryParse(Console.ReadLine(), out int role) || role < 1 || role > 4)
+                {
+                    Utility.DisplayErrorMessage("Wrong Choice. Please select a valid role.");
+                    return;
                 }
 
                 Employee employee = new Employee
@@ -64,42 +77,68 @@ namespace EmplManagementSystem.HR_Dashboard
                 if (n > 0)
                 {
                     Utility.DisplaySuccessMessage("Added Employee Successfully");
-
+                    string username = Utility.UsernameGenarator();
+                    string password = "EMSpass@1234";
+                   
                     // Fetch the newly added employee along with related Department
                     var emp2 = dbo.Employees.FirstOrDefault(x => x.empName == name && x.isActive==false);
                     if (emp2 != null)
                     {
-                        var obj=dbo.UserInfoes.FirstOrDefault(x=>x.Employee.empId==mang);
-                        var obj1 = dbo.UserInfoes.FirstOrDefault(x => x.Employee.Department.deptId == dept);
-                        SendMail sendMail = new SendMail()
-                       
+                        UserInfo userInfo = new UserInfo()
                         {
-                            Subject = "Welcome to Our Organization - Complete Your Registration",
-                            ToEmail = email,
-                            Body =
-                              $"<html><body>" +
-                              $"<h1>Welcome, {emp2.empName}!</h1>" +
-                              $"<p>We are delighted to have you join our organization.</p>" +
-                              $"<p><strong>Your Employee ID:</strong> {emp2.empId}</p>" +
-                              $"<p>Please complete your registration process using your Employee ID by the end of today to activate your account.</p>" +
-                              $"<br><strong>Details of Your Employment:</strong><br>" +
-                              $"1. <strong>Package:</strong> {sal} LPA<br>" +
-                              $"2. <strong>Manager:</strong> {obj.Employee.empName} <br>" +
-                              $"3. <strong>Manager Email:</strong> {obj.Email} <br>" +
-                              $"4. <strong>Department:</strong> {obj1.Employee.Department.deptName} <br>" +
-                              $"<p>If you have any questions or require assistance, feel free to reach out to the HR department.</p>" +
-                              $"<p>Looking forward to working with you!</p>" +
-                              $"<p>Best Regards,</p>" +
-                              $"<p><strong>Employee Management System Team</strong></p>" +
-                              $"</body></html>"
+                            empId = emp2.empId,
+                            Email = email,
+                            userName = username,
+                            password = Utility.HashPassword(password),
+                            roleId = role,
+                            address = null,
+                            isActive = false,
+                            Mobile = null,
+
                         };
-                        try
+                        dbo.UserInfoes.Add(userInfo);
+                        int q = dbo.SaveChanges();
+                        if (q > 0)
                         {
-                            sendMail.SendEmail(sendMail);
+                            var obj = dbo.UserInfoes.FirstOrDefault(x => x.Employee.empId == mang);
+                            var obj1 = dbo.UserInfoes.FirstOrDefault(x => x.Employee.Department.deptId == dept);
+                            SendMail sendMail = new SendMail()
+
+                            {
+                                Subject = "Welcome to Our Organization - Complete Your Registration",
+                                ToEmail = email,
+                                Body =
+                                  $"<html><body>" +
+                                  $"<h1>Welcome, {emp2.empName}!</h1>" +
+                                  $"<p>We are delighted to have you join our organization.</p>" +
+                                  $"<p><strong>Your UserName:</strong> {username}</p>" +
+                                  $"<p><strong>Your Password:</strong> {password}</p>" +
+                                  $"<p><strong>Your Role id:</strong> {role}</p>" +
+                                  $"<p>Please complete your registration process using your Employee ID by the end of today to activate your account.</p>" +
+                                  $"<br><strong>Details of Your Employment:</strong><br>" +
+                                  $"1. <strong>Package:</strong> {sal} LPA<br>" +
+                                  $"2. <strong>Manager:</strong> {obj.Employee.empName} <br>" +
+                                  $"3. <strong>Manager Email:</strong> {obj.Email} <br>" +
+                                  $"4. <strong>Department:</strong> {obj1.Employee.Department.deptName} <br>" +
+                                  $"<p>If you have any questions or require assistance, feel free to reach out to the HR department.</p>" +
+                                  $"<p>Looking forward to working with you!</p>" +
+                                  $"<p>Best Regards,</p>" +
+                                  $"<p><strong>Employee Management System Team</strong></p>" +
+                                  $"</body></html>"
+                            };
+                            try
+                            {
+                                sendMail.SendEmail(sendMail);
+                            }
+                            catch (Exception ex)
+                            {
+                                Utility.DisplayErrorMessage($"Failed to send email Check Internet Connection: {ex.Message}");
+                            }
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            Utility.DisplayErrorMessage($"Failed to send email Check Internet Connection: {ex.Message}");
+                            Utility.DisplayErrorMessage("Something Went Wrong !!!");
+                            AddEmployee();
                         }
                     }
                 }

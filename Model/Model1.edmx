@@ -63,7 +63,7 @@
           <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="empId" Type="int" Nullable="false" />
           <Property Name="userName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Mobile" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="Mobile" Type="varchar" MaxLength="15" />
           <Property Name="Email" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="address" Type="varchar" MaxLength="100" />
           <Property Name="password" Type="varbinary" MaxLength="500" Nullable="false" />
@@ -403,7 +403,7 @@ warning 6002: The table/view 'Employee_Management_System.dbo.employeeDetails' do
           <Property Name="userId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="empId" Type="Int32" Nullable="false" />
           <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mobile" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="password" Type="Binary" MaxLength="500" FixedLength="false" Nullable="false" />

@@ -17,6 +17,7 @@ namespace EmplManagementSystem.ManagerDashboard
         Employee_Management_SystemEntities3 dbo = new Employee_Management_SystemEntities3();
         public void SearchbyId(int id)
         {
+            
             var obj = dbo.UserInfoes.FirstOrDefault(x => x.empId == id);
 
             if (obj != null)
@@ -40,6 +41,7 @@ namespace EmplManagementSystem.ManagerDashboard
 
         public void SearchbyName(string id)
         {
+           
             var obj = dbo.UserInfoes.FirstOrDefault(x => x.Employee.empName == id);
             if (obj != null)
             {

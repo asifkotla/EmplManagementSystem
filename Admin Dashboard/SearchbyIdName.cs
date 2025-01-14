@@ -16,7 +16,8 @@ namespace EmplManagementSystem.Admin_Dashboard
         
         public void SearchbyId(int id)
         {
-            
+            Utility.Heading1();
+
             var obj = dbo.dtlForAdmins.FirstOrDefault(x => x.empId == id );
            
             if (obj != null)
@@ -37,6 +38,7 @@ namespace EmplManagementSystem.Admin_Dashboard
 
         public void SearchbyName(string name)
         {
+            Utility.Heading1();
             var obj = dbo.dtlForAdmins.FirstOrDefault(x => x.EmpName == name );
             if (obj != null)
             {

@@ -29,6 +29,7 @@ namespace EmplManagementSystem.Admin_Dashboard
         public void HandleMainmenu(string Username)
         {
             Console.Clear();
+            Utility.Heading1();
             DisplayMenu();
             Console.Write("\nEnter Your Choice ");
             int n = int.Parse(Console.ReadLine());
@@ -63,6 +64,7 @@ namespace EmplManagementSystem.Admin_Dashboard
                     }
                     else if (q == 2)
                     {
+                        Utility.Heading1();
                         Console.WriteLine("1.Search By Id\n2.Search By Name");
                         var w = int.Parse(Console.ReadLine());
                         if (w == 1)
@@ -120,6 +122,7 @@ namespace EmplManagementSystem.Admin_Dashboard
                     }
                 break;
                 case 4:
+                    Utility.Heading1();
                     Console.WriteLine("1.Appraisals\n2.Back");
                     int a=int.Parse(Console.ReadLine());
                     if (a == 1)

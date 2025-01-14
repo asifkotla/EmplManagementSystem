@@ -17,6 +17,7 @@ namespace EmplManagementSystem.SignUp
         Employee_Management_SystemEntities3 dbo = new Employee_Management_SystemEntities3();
         public void frgtpass(string name)
         {
+            Utility.Heading1();
             var obj = dbo.UserInfoes.FirstOrDefault(x=>x.userName==name);
             if (obj != null)
             {

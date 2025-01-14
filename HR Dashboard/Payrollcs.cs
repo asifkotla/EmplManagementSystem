@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EmplManagementSystem.Utility1;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,7 +38,7 @@ namespace EmplManagementSystem.HR_Dashboard
 
             decimal totalIncentives = completedTasks * TaskIncentive;
             decimal netSalary = CalculateNetSalary(grossSalary, completedTasks);
-
+            
             Console.WriteLine("----- Salary Breakdown -----");
             Console.WriteLine($"Gross Salary     : {grossSalary}");
             Console.WriteLine($"Tax Deducted     : {tax}");

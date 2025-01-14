@@ -11,6 +11,7 @@ namespace EmplManagementSystem.SignUp
 
         public bool ChangePassword()
         {
+            Utility.Heading1();
             try
             {
                 Console.WriteLine("Enter User Name:");

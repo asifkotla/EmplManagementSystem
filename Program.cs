@@ -1,5 +1,6 @@
 ﻿using EmplManagementSystem.Model;
 using EmplManagementSystem.SignUp;
+using EmplManagementSystem.Utility1;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,15 +13,16 @@ namespace EmplManagementSystem
     {
         static void Main(string[] args)
         {
-           
+            Utility.Heading1();
+
             bool isLogedIn = false;
             int ch;
             do
             {
                 if (isLogedIn == false)
                 {
-                    Console.WriteLine("1:Login");
-                    Console.WriteLine("2:SignUp");
+                    Signup signup = new Signup();
+                    signup.IsLogin();
                 }
                 else
                 {
@@ -54,7 +56,7 @@ namespace EmplManagementSystem
                         break;
 
                     case 2:
-                        bool r = lg.SignUp();
+                        //bool r = lg.SignUp();
                         break;
 
                     case 8:

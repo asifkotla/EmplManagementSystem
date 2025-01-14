@@ -16,6 +16,8 @@ namespace EmplManagementSystem.Admin_Dashboard
         Employee_Management_SystemEntities3 dbo = new Employee_Management_SystemEntities3();
         public void UpdateEmployee()
         {
+            Utility.Heading1();
+
             try
             {
                 Console.Clear();

@@ -32,6 +32,7 @@ namespace EmplManagementSystem.HR_Dashboard
         public void HandleMainmenu(string Username)
         {
             Console.Clear();
+            Utility.Heading1();
             DisplayMenu();
             Console.Write("\nEnter Your Choice ");
             int n = int.Parse(Console.ReadLine());
