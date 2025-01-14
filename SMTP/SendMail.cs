@@ -18,8 +18,8 @@ namespace EmplManagementSystem.SMTP
         public string Body { get; set; }
 
 
-        string fromemail = "employeeemanagementsystem@gmail.com";
-        string frompass = "hnnq loam hhja romh";
+        string fromemail = "Your Email";
+        string frompass = "Your APP Password";
 
         public void SendEmail(SendMail sendMail)
         {
